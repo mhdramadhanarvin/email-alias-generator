@@ -1,0 +1,47 @@
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+.vercel/
+.netlify/
+
+# Environment files
+.env
+.env.local
+.env.*.local
+
+# Cloudflare
+.wrangler/
+dist/
+
+# AI/Agent artifacts
+.agents/
+.artifacts/
+.mindmodel/
+.superpowers/
+
+# Logs
+*.log
+npm-debug.log*
+pnpm-debug.log*
+
+# Editor/IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Plans and internal docs
+PLAN.md
+*.plan.md
+
+# Temporary files
+*.tmp
+*.temp
+.cache/
