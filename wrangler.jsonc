@@ -26,7 +26,7 @@
   },
   "routes": [
     {
-      "pattern": "gen-alias.mdhn.my.id",
+      "pattern": "email-alias.mdhn.my.id",
       "custom_domain": true,
     },
   ],
