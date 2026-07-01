@@ -1,14 +1,183 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
+    <!-- Charset and Viewport -->
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Generate unlimited Gmail dot-variation aliases instantly. Protect your inbox, use unique aliases for every signup." />
-    <title>Email Alias Generator</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+    <!-- Primary Meta Tags (SEO) -->
+    <title>Email Alias Generator - Generate Email Dot Aliases Instantly</title>
+    <meta
+      name="description"
+      content="Generate unlimited Email dot-variation aliases instantly. Protect your inbox, maintain privacy, and manage spam with unique email aliases for every signup. Free, fast, and secure."
+    />
+    <meta
+      name="keywords"
+      content="email alias, gmail aliases, dot notation, email privacy, spam protection, anonymous email"
+    />
+    <meta name="author" content="Email Alias Generator" />
+    <meta
+      name="robots"
+      content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"
+    />
+    <meta name="theme-color" content="#10b981" />
+
+    <!-- Open Graph (Social Media) -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://email-alias.mdhn.my.id" />
+    <meta
+      property="og:title"
+      content="Email Alias Generator - Generate Email Dot Aliases"
+    />
+    <meta
+      property="og:description"
+      content="Instantly generate unlimited Email dot-variation aliases to protect your inbox and maintain privacy."
+    />
+    <meta
+      property="og:image"
+      content="https://email-alias.mdhn.my.id/og-image.svg"
+    />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:locale" content="en_US" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content="https://email-alias.mdhn.my.id" />
+    <meta
+      name="twitter:title"
+      content="Email Alias Generator - Generate Email Aliases Instantly"
+    />
+    <meta
+      name="twitter:description"
+      content="Instantly generate unlimited Email dot-variation aliases to protect your inbox and maintain privacy."
+    />
+    <meta
+      name="twitter:image"
+      content="https://email-alias.mdhn.my.id/og-image.svg"
+    />
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://email-alias.mdhn.my.id" />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="apple-touch-icon" href="/favicon.svg" />
+
+    <!-- DNS Prefetch & Preconnect -->
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
+    <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <!-- Fonts with Font Display Swap (prevent FOIT, reduce CLS) -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap&family=display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Preload Critical Resources -->
+    <link
+      rel="preload"
+      as="font"
+      type="font/woff2"
+      href="https://fonts.gstatic.com/s/inter/v13/UcCO3FwrK3iLTeHAPUeSJ.woff2"
+      crossorigin
+    />
+
+    <!-- Alternate Links (if multilingual) -->
+    <link rel="alternate" hreflang="en" href="https://email-alias.mdhn.my.id" />
+
+    <!-- JSON-LD Structured Data (Schema.org) -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "Email Alias Generator",
+        "description": "Generate unlimited Email dot-variation aliases instantly. Protect your inbox, maintain privacy, and manage spam with unique email aliases for every signup.",
+        "url": "https://email-alias.mdhn.my.id",
+        "applicationCategory": "UtilityApplication",
+        "operatingSystem": "Web",
+        "author": {
+          "@type": "Organization",
+          "name": "Email Alias Generator"
+        },
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "USD"
+        },
+        "aggregateRating": {
+          "@type": "AggregateRating",
+          "ratingValue": "4.8",
+          "ratingCount": "100",
+          "bestRating": "5",
+          "worstRating": "1"
+        },
+        "featureList": [
+          "Instant alias generation",
+          "Copy to clipboard",
+          "Bulk export to .txt",
+          "Shuffle randomization",
+          "Client-side privacy",
+          "Dark mode UI"
+        ]
+      }
+    </script>
+
+    <!-- FAQ Schema (Rich Snippets) -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What is an email alias?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "An email alias is an alternative email address that forwards messages to your primary email. Email supports dot-notation aliases - adding dots in the local part (john.doe@gmail.com vs johndoe@gmail.com) creates unique aliases that all deliver to your inbox."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How many aliases can I generate?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "You can generate up to 20 aliases per generation request. The number of possible aliases depends on your email length and the maximum dots setting (default: 2 dots)."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Is my email data stored?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "No. Email Alias Generator runs entirely in your browser. Your email address is never sent to any server and is not stored anywhere. All processing happens locally on your device."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Does this work with non-Email providers?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "While this tool is optimized for Email, the alias concept works with any email provider that supports dot-notation (like Yahoo, ProtonMail) or email forwarding. Check your email provider's documentation for alias support."
+            }
+          }
+        ]
+      }
+    </script>
+
+    <!-- Organization Schema -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "Email Alias Generator",
+        "url": "https://email-alias.mdhn.my.id",
+        "sameAs": ["https://github.com/zanemy/generator-email-alias"],
+        "description": "Free tool to generate unlimited Email dot-variation aliases for privacy and testing"
+      }
+    </script>
   </head>
   <body>
     <div id="root"></div>

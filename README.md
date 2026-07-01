@@ -2,6 +2,8 @@
 
 Generate unlimited email aliases instantly. Use multiple aliases for any service while receiving all emails in a single inbox.
 
+**Live:** [https://email-alias.mdhn.my.id](https://email-alias.mdhn.my.id)
+
 ## Why This Project Exists
 
 **The Real Problem:** You're testing a platform's registration feature. You try it with your email—success. You try again to test the flow a second time, but the system rejects it: "Email already exists." You only have 2 real emails and no more to spare. Meanwhile, you need to receive OTP codes and verification links to actually complete the registration test.
@@ -50,6 +52,7 @@ All aliases deliver to your real inbox—no configuration needed. Use a differen
 - **Privacy First** - No data stored, completely client-side. Your email never leaves your device
 - **Works Everywhere** - Supports Gmail, Yahoo, Proton Mail, and any email provider with alias/dot-notation support
 - **Dark Mode** - Modern, minimalist aesthetic optimized for reduced eye strain
+- **SEO Optimized** - Rich metadata, structured data, and Core Web Vitals optimizations for discoverability
 
 ## Get Started
 

@@ -86,10 +86,12 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-background flex flex-col">
-      <div className="flex-1 mx-auto w-full max-w-2xl px-4 py-12 sm:px-6 lg:px-8">
+      <main className="flex-1 mx-auto w-full max-w-2xl px-4 py-12 sm:px-6 lg:px-8" role="main" aria-label="Email alias generator">
         <Header />
 
-        <div className="mt-12 space-y-6">
+        <section className="mt-12 space-y-6" aria-labelledby="generator-heading">
+          <h2 id="generator-heading" className="sr-only">Generator Form</h2>
+          
           {/* Input Card */}
           <div className="card animate-fade-in">
             <div className="space-y-4">
@@ -101,7 +103,7 @@ export default function App() {
               />
 
               <div className="flex items-center gap-4">
-                <label className="flex items-center gap-2 text-sm text-text-muted">
+                <label htmlFor="max-dots-select" className="flex items-center gap-2 text-sm text-text-muted">
                   <span>Max dots:</span>
                 </label>
                 <MaxDotsSelect value={maxDots} onChange={setMaxDots} />
@@ -117,7 +119,8 @@ export default function App() {
 
           {/* Results Card */}
           {aliases.length > 0 && (
-            <div className="card animate-slide-up space-y-4">
+            <div className="card animate-slide-up space-y-4" role="region" aria-labelledby="results-heading">
+              <h2 id="results-heading" className="sr-only">Generated Aliases</h2>
               <ActionBar
                 total={aliases.length}
                 onCopyAll={handleCopyAll}
@@ -127,8 +130,8 @@ export default function App() {
               <AliasTable aliases={aliases} />
             </div>
           )}
-        </div>
-      </div>
+        </section>
+      </main>
 
       <Footer />
 

@@ -1,12 +1,13 @@
 # PROJECT KNOWLEDGE BASE
 
 **Generated:** 2026-07-01  
-**Commit:** ed7b1b9 (feat: setup wrangler)  
+**Last Updated:** 2026-07-01 22:32 UTC (SEO optimization + domain migration)  
+**Commit:** (pending)  
 **Branch:** main
 
 ## OVERVIEW
 
-Email Alias Generator — a sleek, client-side React SPA for generating unlimited Gmail dot-variation aliases. No backend, pure frontend generation with TanStack Table, Tailwind CSS, and Cloudflare Pages deployment.
+Email Alias Generator — a sleek, client-side React SPA for generating unlimited Email dot-variation aliases. No backend, pure frontend generation with TanStack Table, Tailwind CSS, and Cloudflare Pages deployment.
 
 **Stack:** React 18 + Vite + TypeScript + Tailwind + TanStack Table + Lucide React
 
@@ -26,6 +27,9 @@ src/
 
 public/
 ├── favicon.svg
+├── og-image.svg         # OG image for social sharing (1200x630)
+├── robots.txt           # SEO: crawl directives
+└── sitemap.xml          # SEO: URL index
 
 Config:
 ├── vite.config.ts       # React + Cloudflare plugin
@@ -38,61 +42,68 @@ Config:
 
 ## WHERE TO LOOK
 
-| Task | Location | Notes |
-|------|----------|-------|
-| **Email validation logic** | `src/lib/generator.ts` | `isValidGmail()`, `extractLocalPart()` |
-| **Alias generation algorithm** | `src/lib/generator.ts` | Bit-manipulation 2^(n-1) combos, max dots limit |
-| **UI component list** | `src/components/` | Each handles single concern (input, button, table, etc) |
-| **App state management** | `src/App.tsx` | useState for email, maxDots, aliases, loading, error, toast |
-| **Copy-to-clipboard logic** | `src/components/CopyButton.tsx` + `src/hooks/useClipboard.ts` | navigator.clipboard API |
-| **Export to .txt** | `src/App.tsx` (handleExport) | Blob → URL → download trigger |
-| **Tailwind config** | `tailwind.config.js` | Custom dark palette, border-radius, animations |
-| **Deployment config** | `wrangler.jsonc` | SPA routing, assets handling, observability enabled |
+| Task                           | Location                                                      | Notes                                                       |
+| ------------------------------ | ------------------------------------------------------------- | ----------------------------------------------------------- |
+| **Email validation logic**     | `src/lib/generator.ts`                                        | `isValidEmail()`, `extractLocalPart()`                      |
+| **Alias generation algorithm** | `src/lib/generator.ts`                                        | Bit-manipulation 2^(n-1) combos, max dots limit             |
+| **UI component list**          | `src/components/`                                             | Each handles single concern (input, button, table, etc)     |
+| **App state management**       | `src/App.tsx`                                                 | useState for email, maxDots, aliases, loading, error, toast |
+| **Copy-to-clipboard logic**    | `src/components/CopyButton.tsx` + `src/hooks/useClipboard.ts` | navigator.clipboard API                                     |
+| **Export to .txt**             | `src/App.tsx` (handleExport)                                  | Blob → URL → download trigger                               |
+| **Tailwind config**            | `tailwind.config.js`                                          | Custom dark palette, border-radius, animations              |
+| **Deployment config**          | `wrangler.jsonc`                                              | SPA routing, assets handling, observability enabled         |
+| **SEO & Meta tags**            | `index.html` (head)                                           | OG, Twitter cards, JSON-LD schemas, canonical, preload      |
+| **Robots & Sitemap**           | `public/robots.txt`, `public/sitemap.xml`                     | Search engine crawl directives, URL index                    |
 
 ---
 
 ## CODE MAP
 
-| Symbol | Type | File | Role |
-|--------|------|------|------|
-| `generateVariants()` | Function | lib/generator.ts | Core: generates all valid dot combos up to maxDots, limits to maxVariants |
-| `extractLocalPart()` | Function | lib/generator.ts | Strips domain, removes dots from local part |
-| `isValidGmail()` | Function | lib/generator.ts | Regex validation for @gmail.com |
-| `shuffle()` | Function | lib/generator.ts | Fisher-Yates shuffle for alias reordering |
-| `App` | Component | App.tsx | Root: state mgmt, callbacks (generate, shuffle, copy, export) |
-| `AliasTable` | Component | components/AliasTable.tsx | Renders list of aliases with per-row copy buttons |
-| `EmailInput` | Component | components/EmailInput.tsx | Controlled input with validation error display, clear button |
-| `CopyButton` | Component | components/CopyButton.tsx | Icon toggle (Copy → Check on click), auto-revert 1.5s |
-| `ActionBar` | Component | components/ActionBar.tsx | Buttons: Copy All, Export, Shuffle |
-| `Toast` | Component | components/Toast.tsx | Notification: success (green) / error (red), 3s auto-dismiss |
+| Symbol               | Type      | File                      | Role                                                                      |
+| -------------------- | --------- | ------------------------- | ------------------------------------------------------------------------- |
+| `generateVariants()` | Function  | lib/generator.ts          | Core: generates all valid dot combos up to maxDots, limits to maxVariants |
+| `extractLocalPart()` | Function  | lib/generator.ts          | Strips domain, removes dots from local part                               |
+| `isValidEmail()`     | Function  | lib/generator.ts          | Regex validation for @gmail.com                                           |
+| `shuffle()`          | Function  | lib/generator.ts          | Fisher-Yates shuffle for alias reordering                                 |
+| `App`                | Component | App.tsx                   | Root: state mgmt, callbacks (generate, shuffle, copy, export)             |
+| `AliasTable`         | Component | components/AliasTable.tsx | Renders list of aliases with per-row copy buttons                         |
+| `EmailInput`         | Component | components/EmailInput.tsx | Controlled input with validation error display, clear button              |
+| `CopyButton`         | Component | components/CopyButton.tsx | Icon toggle (Copy → Check on click), auto-revert 1.5s                     |
+| `ActionBar`          | Component | components/ActionBar.tsx  | Buttons: Copy All, Export, Shuffle                                        |
+| `Toast`              | Component | components/Toast.tsx      | Notification: success (green) / error (red), 3s auto-dismiss              |
 
 ---
 
 ## CONVENTIONS
 
 **Component Structure:**
+
 - One component per file, named after feature (EmailInput, CopyButton)
 - Props interfaces defined at top, `interface ComponentProps { ... }`
 - Exported as `export default` or `export function`
 - memo() for list items and frequently re-rendering components
 
 **State Management:**
+
 - useState for local UI state (input, loading, toast)
 - useCallback for event handlers (memoize across renders)
 - No redux/zustand — simple enough for single component tree
 
 **Styling:**
+
 - Tailwind classes exclusively, no CSS files except index.css
 - Custom Tailwind config for colors (dark theme), animations, spacing
 - No inline styles (use Tailwind utilities)
 - Consistent spacing: gap-2, gap-4, p-6 for cards
 
 **Naming:**
+
 - PascalCase for components, camelCase for functions/variables
 - Descriptive: `handleGenerate`, `onCopyAll`, not `go()` or `do()`
 - Files match exported default (Header.tsx exports Header component)
 
 **TypeScript:**
+
 - Strict mode enabled (tsconfig.json)
 - Props typed with interfaces (not type aliases)
 - No `any` types, use generics for reusable components
@@ -114,10 +125,12 @@ Config:
 ## UNIQUE STYLES
 
 **Animation delays (stagger effect):**
+
 - Defined in tailwind.config.js: `.stagger-1` through `.stagger-5` (50ms increments)
 - Not currently used in components, but available for future staggered list reveal
 
 **Custom Tailwind colors (dark theme):**
+
 - Background: `#0a0a0a` (near-black, not pure black for OLED savings)
 - Surface: `#141414` (card bg)
 - Accent: `#10b981` (emerald green, represents "copy/success")
@@ -125,11 +138,13 @@ Config:
 - Text muted: `#737373` (60% brightness)
 
 **Button variants:**
+
 - `.btn` — primary action (emerald, white text)
 - `.btn-secondary` — secondary action (transparent + border, lighter on hover)
 - `.btn-icon` — icon-only buttons (CopyButton, close/clear buttons)
 
 **Animations:**
+
 - `fadeIn` (300ms) — Header entrance, error messages
 - `slideUp` (400ms) — Results card entrance
 - Both use `ease-out` curve for natural feel
@@ -154,23 +169,60 @@ pnpm deploy
 
 **Build pipeline:** `pnpm build` → `tsc` (type check) → `vite build` (bundle & minify)
 
+**Production bundle:** 204KB total, ~178KB gzipped across code-split chunks:
+- vendor: 43.22KB gzipped
+- ui-vendor: 4KB gzipped  
+- main: 3.91KB gzipped
+- CSS: 3.32KB gzipped
+
+**Bundle optimization:** Code splitting enabled, esbuild minification (faster than terser), console/debugger removal, dependency pre-bundling
+
 ---
 
 ## PERFORMANCE NOTES
 
 **Alias generation limits:**
+
 - maxVariants capped at 20 per generation call (App.tsx line 43)
 - For base name >11 chars: 2^10+ = 1000+ combos possible, capped to 20 for UX
 - No Web Worker (unnecessary for current scope)
 
 **List rendering:**
+
 - AliasTable maps over aliases array directly (not virtualized)
 - 20 items renders fast; if future versions exceed 100, add virtualization
 
 **Memoization:**
+
 - CopyButton memoized (frequently re-renders in list)
 - AliasTable memoized (prevents re-render on parent state changes)
 - App component not memoized (root, should re-render)
+
+---
+
+## SEO & PERFORMANCE OPTIMIZATION (2026-07-01)
+
+**Metadata & Indexing:**
+- OG tags: og:type, og:url, og:image (1200x630), og:description
+- Twitter cards: summary_large_image with brand colors
+- Canonical URL: email-alias.mdhn.my.id
+- JSON-LD schemas: SoftwareApplication, FAQPage (4 Q&As), Organization
+- robots.txt: index, follow, max-snippet, max-image-preview, max-video-preview
+- sitemap.xml: URL index with changefreq/priority
+- Preload: Inter font (woff2), font-display=swap prevents FOIT/CLS
+- Prefetch: dns-prefetch, preconnect for CDN resources
+
+**Core Web Vitals Optimizations:**
+- Font preload + swap strategy eliminates layout shift
+- Code splitting reduces initial JS payload
+- Async/defer attributes on non-critical scripts
+- Image optimization: OG image preload
+
+**Semantic HTML Enhancements:**
+- Proper `<header>`, `<main>`, `<footer>`, `<section>` elements
+- ARIA labels on interactive components (buttons, inputs)
+- Role attributes for semantic meaning
+- Focus management and keyboard navigation
 
 ---
 
@@ -181,7 +233,8 @@ pnpm deploy
 3. **Bit manipulation in generator.ts.** — Treat (i >> j) & 1 logic as read-only; it's correct and matches Python reference.
 4. **Toast auto-dismisses after 3s.** — User can't dismiss manually; another toast will replace it (only one visible at a time).
 5. **Max dots default is 2.** — Hardcoded in PLAN.md, reflected in App.tsx line 14. If changing, update both.
+6. **Domain:** Production site is at email-alias.mdhn.my.id (migrated from email-alias-generator.pages.dev)
 
 ---
 
-*Generated by /init-deep. Verify and refine as project evolves.*
+_Generated by /init-deep. Verify and refine as project evolves._

@@ -1,10 +1,10 @@
-import { Mail } from 'lucide-react'
+import { Mail } from "lucide-react";
 
 export default function Header() {
   return (
-    <div className="animate-fade-in">
+    <header className="animate-fade-in" role="banner">
       <div className="flex items-center gap-3">
-        <div className="rounded-button bg-accent/10 p-3">
+        <div className="rounded-button bg-accent/10 p-3" aria-hidden="true">
           <Mail className="h-6 w-6 text-accent" />
         </div>
         <div>
@@ -12,10 +12,10 @@ export default function Header() {
             Email Alias Generator
           </h1>
           <p className="mt-1 text-sm text-text-muted">
-            Transform your Gmail into unlimited aliases instantly
+            Transform your Email into unlimited aliases instantly
           </p>
         </div>
       </div>
-    </div>
-  )
+    </header>
+  );
 }
