@@ -46,3 +46,7 @@ PLAN.md
 *.tmp
 *.temp
 .cache/
+
+.dev.vars*
+!.dev.vars.example
+!.env.example
