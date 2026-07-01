@@ -86,7 +86,7 @@ This application is deployed on **Cloudflare Pages** for fast, global access wit
 
 ```bash
 # Deploy to Cloudflare Pages (requires wrangler setup)
-pnpm deploy
+pnpm run deploy
 ```
 
 Or connect your GitHub repository to Cloudflare Pages for automatic deployments on every push.
