@@ -18,7 +18,7 @@ export default function EmailInput({
       <div className="relative">
         <input
           type="email"
-          placeholder="you@gmail.com"
+          placeholder="you@example.com"
           value={value}
           onChange={(e) => onChange(e.target.value)}
           className={`input ${error ? "input-error" : ""}`}

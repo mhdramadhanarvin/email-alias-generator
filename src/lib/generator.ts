@@ -1,7 +1,7 @@
 /**
- * Generate Gmail dot-variation aliases
+ * Generate email dot-variation aliases for any provider
  * 
- * Rules (matching Python reference):
+ * Rules:
  * - Insert at most one '.' per gap between original characters
  * - No adjacent '.' (no john..doe)
  * - No leading/trailing '.'
@@ -10,13 +10,14 @@
 
 export function generateVariants(
   baseLocal: string,
+  domain: string,
   maxDots: number = 2,
   maxVariants: number = 20
 ): string[] {
   const n = baseLocal.length;
   
   if (n < 2) {
-    return [`${baseLocal}@gmail.com`];
+    return [`${baseLocal}@${domain}`];
   }
 
   const variants: string[] = [];
@@ -46,7 +47,7 @@ export function generateVariants(
 
     // Only include if dot count is within limit
     if (dotCount <= maxDots) {
-      variants.push(`${result}@gmail.com`);
+      variants.push(`${result}@${domain}`);
     }
   }
 
@@ -64,11 +65,19 @@ export function extractLocalPart(email: string): string {
 }
 
 /**
- * Validate Gmail address
+ * Validate email address (any provider)
  */
-export function isValidGmail(email: string): boolean {
-  const emailRegex = /^[a-zA-Z0-9._%+-]+@gmail\.com$/i;
+export function isValidEmail(email: string): boolean {
+  const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/i;
   return emailRegex.test(email);
+}
+
+/**
+ * Extract domain from email address
+ */
+export function extractDomain(email: string): string {
+  const [, domain] = email.split('@');
+  return domain;
 }
 
 /**

@@ -1,5 +1,5 @@
 import { useState, useCallback } from 'react'
-import { generateVariants, extractLocalPart, isValidGmail, shuffle } from './lib/generator'
+import { generateVariants, extractLocalPart, extractDomain, isValidEmail, shuffle } from './lib/generator'
 import Header from './components/Header'
 import EmailInput from './components/EmailInput'
 import MaxDotsSelect from './components/MaxDotsSelect'
@@ -7,6 +7,7 @@ import GenerateButton from './components/GenerateButton'
 import AliasTable from './components/AliasTable'
 import ActionBar from './components/ActionBar'
 import Toast from './components/Toast'
+import Footer from './components/Footer'
 
 export default function App() {
   const [email, setEmail] = useState('')
@@ -29,8 +30,8 @@ export default function App() {
       return
     }
 
-    if (!isValidGmail(email)) {
-      setError('Please enter a valid Gmail address')
+    if (!isValidEmail(email)) {
+      setError('Please enter a valid email address')
       return
     }
 
@@ -39,7 +40,8 @@ export default function App() {
     setTimeout(() => {
       try {
         const localPart = extractLocalPart(email)
-        const generated = generateVariants(localPart, maxDots, 20)
+        const domain = extractDomain(email)
+        const generated = generateVariants(localPart, domain, maxDots, 20)
         const shuffled = shuffle(generated)
         setAliases(shuffled)
         showToast(`Generated ${generated.length} aliases`)
@@ -83,8 +85,8 @@ export default function App() {
   }, [aliases])
 
   return (
-    <div className="min-h-screen bg-background">
-      <div className="mx-auto max-w-2xl px-4 py-12 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-background flex flex-col">
+      <div className="flex-1 mx-auto w-full max-w-2xl px-4 py-12 sm:px-6 lg:px-8">
         <Header />
 
         <div className="mt-12 space-y-6">
@@ -127,6 +129,8 @@ export default function App() {
           )}
         </div>
       </div>
+
+      <Footer />
 
       {/* Toast Notification */}
       {toast && <Toast message={toast.message} type={toast.type} />}

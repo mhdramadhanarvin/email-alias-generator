@@ -21,6 +21,7 @@ dist/
 .mindmodel/
 .superpowers/
 .opencode/
+.sisyphus/
 
 # Logs
 *.log
